@@ -1,12 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-float d_to_b(float);
-float b_to_d(float);
+int d_to_b(int);
+int b_t_d(int);
 int main()
 {
-    float num,a,b;
-    int choice;
+    int num,choice,a,b;
     while(1)
     {
         printf("\n1.for decimal to binary\n2.for binary to decimal\n3.for exit\n");
@@ -16,15 +15,15 @@ int main()
         {
         case 1:
             printf("\nEnter a number ");
-            scanf("%f",&num);
+            scanf("%d",&num);
             a=d_to_b(num);
-            printf("\ndecimal to binary conversion of %f is %f",num,a);
+            printf("\ndecimal to binary conversion of %d is %d",num,a);
             break;
         case 2:
             printf("\nEnter a number ");
-            scanf("%f",&num);
+            scanf("%d",&num);
             b=b_to_d(num);
-            printf("\nbinary to decimal conversion of %f is %f",num,b);
+            printf("\nbinary to decimal conversion of %d is %d",num,b);
             break;
         case 3:
             exit (1);
@@ -33,70 +32,44 @@ int main()
     return 0;
 }
 
-float d_to_b(float num)
+int d_to_b(int num)
 {
-    float s=0,fl;
-    int rem,c=0,fpnum=0,j=0,x,k,p,i=0;
-    k=num;
-    fl=num-k;
-    x=sqrt(k*k);
+    int rem,x,s=0,c=0,j=0;
+    x=sqrt(num*num);
     do
     {
         rem=x%2;
         c++;
         s=s*10+rem;
         x=x/2;
-    }
-    while(x!=0);
-    if(k+sqrt(k*k)==0)
+    } while(x!=0);
+    if(num+sqrt(num*num)==0)
     {
-        s=s*10+1;
-        c++;
+      s=s*10+1;
+      c++;
     }
 
-    k=s;
+    num=s;
     s=0;
     while(j!=c)
     {
-        rem=k%10;
+        rem=num%10;
         j++;
         s=s*10+rem;
-        k=k/10;
+        num=num/10;
     }
-    if(fl!=0)
-        while(fl>0)
-        {
-            {
-                fl=fl*2;
-                p=fl;
-                fl=fl-p;
-                if(p=0)
-                    i++;
-                else
-                {
-                    fpnum=fpnum+pow(10,-i);
-                }
-
-
-            }
-        }
-
-    printf("value %f",fpnum);
-
     return s;
 }
 
-float b_to_d(float num)
+int b_to_d(int num)
 {
-    int r=0,rem,k;
-    float s=0;
-    k=num;
-    while(k>0)
+    int r=0,s=0,n;
+    while(num>0)
     {
-        rem=k%10;
-        s=s+(rem*pow(2,r));
+        n=num%10;
+        s=s+(n*pow(2,r));
         r++;
-        k=k/10;
+        num=num/10;
     }
     return s;
 }
